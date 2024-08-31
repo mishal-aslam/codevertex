@@ -1,20 +1,24 @@
-import { useState } from 'react'
-import Dashboard from './AdminPanel/Dashboard'
-import AddCourse from './AdminPanel/AddCourse'
-import StudentDetails from './AdminPanel/StudentDetails'
-import AddStudent from './AdminPanel/AddStudent'
+// import './App.css';
+import Footer from './components/Footer';
+import Navbar from './components/Navbar';
+import { BrowserRouter } from 'react-router-dom';
+import Home from './pages/Home';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <StudentDetails />
+    <div className="w-screen min-h-screen bg-[#010B10] flex flex-col font-inter">
+
+   
+    <BrowserRouter>
+      <div className="app-container">
+        <Navbar />
+        {/* Your application routes here */}
+        <Home />
+        <Footer />
       </div>
-       
-    </>
-  )
+    </BrowserRouter>
+    </div>
+  );
 }
 
-export default App
+export default App;
