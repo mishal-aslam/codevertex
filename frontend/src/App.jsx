@@ -1,24 +1,42 @@
-// import './App.css';
-import Footer from './components/Footer';
-import Navbar from './components/Navbar';
-import { BrowserRouter } from 'react-router-dom';
-import Home from './pages/Home';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Layout from './components/Layout';
+import {Home} from './pages/Home';
+import AboutPage from './pages/AboutPage';
+import Contact from './pages/Contact';
+import Internship from './pages/Internship';
+import Tutorials from './pages/Tutorials';
+import Courses from './pages/Courses';
+import Loader from './components/PreLoader/Loader';
 
-function App() {
-  return (
-    <div className="w-screen min-h-screen bg-[#010B10] flex flex-col font-inter">
+const App = () => {
+  const [isLoading, setIsLoading] = React.useState(true);
 
-   
-    <BrowserRouter>
-      <div className="app-container">
-        <Navbar />
-        {/* Your application routes here */}
-        <Home />
-        <Footer />
-      </div>
-    </BrowserRouter>
-    </div>
+  React.useEffect(() => {
+    const fetchData = () => {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500);
+    };
+    fetchData();
+  }, []);
+
+  return isLoading ? (
+    <Loader />
+  ) : (
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/tutorials" element={<Tutorials />} />
+          <Route path="/internship" element={<Internship />} />
+          <Route path="/courses" element={<Courses />} />
+        </Routes>
+      </Layout>
+    </Router>
   );
-}
+};
 
 export default App;
