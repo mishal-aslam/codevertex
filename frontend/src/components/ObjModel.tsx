@@ -1,51 +1,60 @@
 import React, { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, Stage, PresentationControls } from "@react-three/drei";
-import { useScroll, useTransform } from "framer-motion"; // Import Framer Motion hooks
-import BNW from "../assets/robot_playground.glb";
+import { motion, useAnimation } from "framer-motion";
+// Import 3D model
+import BNW from "../assets/bad_vibes_in_ny.glb";
 
 function Model(props) {
   const { scene } = useGLTF(BNW);
   const modelRef = useRef();
+  const controls = useAnimation();
 
-  // Use scroll progress from Framer Motion
-  const { scrollYProgress } = useScroll();
-  
-  // Faster rotation: Multiply Math.PI * 2 by a factor (e.g., 5) for faster spinning
-  const rotationY = useTransform(scrollYProgress, [0, 1], [0, Math.PI * 6]); // Faster rotation
+  React.useEffect(() => {
+    controls.start({
+      scale: [5, 5, 5],
+      transition: {
+        duration: 20,
+        delay: 10,
+        ease: "easeInOut",
+      },
+    });
+  }, []);
 
-  // Apply rotation on every frame based on scroll
-  useFrame(() => {
-    if (modelRef.current) {
-      modelRef.current.rotation.y = rotationY.get(); // Set rotation from scroll
-    }
-  });
-
-  return <primitive object={scene} ref={modelRef} {...props} />;
+  return (
+    <motion.primitive 
+      object={scene} 
+      ref={modelRef} 
+      {...props} 
+      initial={{ scale: 0 }} 
+      animate={controls} 
+      scale={[5, 5, 5]} 
+    />
+  );
 }
 
 const ObjModel = () => {
   return (
     <div>
-        
-      <div className=" flex items-center justify-center">
+      <div className="flex items-justify-center opacity-70  ">
         <Canvas
           dpr={[1, 2]}
           shadows
-          camera={{ fov: 45, position: [0, 0, 5] }} 
-          className="md:mt-[400px] mt-[150px]"
+          camera={{ fov: 10, position: [50, 50, 50] }} 
+          className="md:mt-[100px] "
           style={{
+            height: "1000px",
+            width: "1000px",
             position: "absolute",
-            // marginTop: "400px",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
           }}
         >
           <color />
-          <PresentationControls zoom={0.5} speed={1.5}>
+          <PresentationControls zoom={1} speed={10}>
             <Stage environment={"sunset"} intensity={0.5}>
-              <Model position={[0, -0.5, 0]}  />{" "}
+              <Model position={[0, -0.5, 0]}  className=" "/> 
             </Stage>
           </PresentationControls>
         </Canvas>

@@ -30,9 +30,9 @@ const Header = () => {
   };
 
   return (
-    <header className="py-4 fixed left-0 right-0 top-0 transition-all duration-400 z-10">
+    <header className="py-4 fixed left-0 right-0 top-0 transition-all duration-400 z-10 ">
       <div
-        className={`flex justify-between items-center border border-white/15 rounded-xl mx-auto backdrop-blur inset-0 ${
+        className={`flex justify-between items-center border border-white/15 rounded-xl mx-auto bg-gradient-to-r from-[#11121575] to-[#0c0d0f90] backdrop-blur-md via-[#11121575] from-[#0c0d0f90] bg-[linear-gradient(137deg,rgba(17,18,20,.75)4.87%,rgba(12,13,15,.9)75.88%)] opacity-100  inset-0 ${
           scrolled
             ? "lg:max-w-3xl md:max-w-xl max-w-52 p-1"
             : "lg:max-w-6xl md:max-w-2xl p-2.5 max-w-64"
@@ -84,7 +84,7 @@ const Header = () => {
         </div>
         <div className="flex gap-4 items-center">
           <div className="md:block hidden">
-            <Button>Get Started</Button>
+            <Button>Sign Up</Button>
           </div>
         </div>
 

@@ -1,15 +1,29 @@
+@import url('https://fonts.cdnfonts.com/css/general-sans');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+* {
+  scroll-behavior: smooth;
+}
+
+
 html,
 body {
+  background: #010103;
+  font-family: 'General Sans', sans-serif;
   overflow-x: hidden;
 }
 
 
 
-
+.text-gradient {
+  background: linear-gradient(137deg, rgba(115, 116, 119, 0.75) 4.87%, rgba(92, 96, 102, 0.9) 75.88%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 
 
